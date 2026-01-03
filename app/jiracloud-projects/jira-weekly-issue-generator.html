@@ -2,18 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Weekly Issue Generator</title>
+  <title>Jira Weekly Issue Generator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    crossorigin="anonymous"
-  />
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous" />
 
   <style>
     :root {
@@ -24,6 +22,8 @@
       --text-main: #1a1a1a;
       --text-muted: #555;
       --border-light: #d0d7e2;
+      --code-bg: #0f172a;
+      --code-text: #e5e7eb;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -75,11 +75,40 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 2.2rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Difficulty bar */
+    .difficulty-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.6rem;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d7dee9;
+    }
+
+    .dot.filled { background: var(--accent); }
+
+    .difficulty-text {
+      margin-left: 6px;
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     .sidebar-item {
       display: flex;
+      align-items: flex-start;
       gap: 0.65rem;
       margin-bottom: 0.95rem;
       font-size: 0.95rem;
@@ -97,20 +126,11 @@
     .divider {
       height: 1px;
       background: var(--border-light);
-      margin: 2rem 0 1.5rem;
+      margin: 1.6rem 0 1.4rem;
     }
 
     /* Main content */
     .content { padding: 2.5rem 3rem; }
-
-    .section-title {
-      font-size: 0.9rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 2.8rem;
-    }
 
     .experience-block { margin-bottom: 3rem; }
 
@@ -122,11 +142,12 @@
       gap: 0.55rem;
     }
 
+    .experience-company i { color: var(--accent); }
+
     .muted {
       color: var(--text-muted);
       line-height: 1.7;
       text-align: justify;
-      margin-top: 0.9rem;
     }
 
     ul {
@@ -138,191 +159,188 @@
 
     ul li { margin-bottom: 0.55rem; }
 
-    .codebox {
-      margin-top: 1rem;
-      border: 1px solid var(--border-light);
+    pre {
+      margin-top: 1.4rem;
+      padding: 1.4rem;
+      background: var(--code-bg);
+      color: var(--code-text);
       border-radius: 8px;
-      background: #fbfbfc;
-      padding: 1rem 1.1rem;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 0.9rem;
-      white-space: pre;
       overflow-x: auto;
+      font-size: 0.85rem;
+      line-height: 1.55;
     }
 
-    .placeholder {
-      margin-top: 1.2rem;
-      padding: 2.2rem;
-      border: 2px dashed var(--border-light);
-      border-radius: 8px;
-      text-align: center;
-      color: var(--text-muted);
-      background: #fafafa;
-      font-style: italic;
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    .diagram-img {
+      width: 100%;
+      margin-top: 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-light);
     }
 
     @media (max-width: 900px) {
       .page { grid-template-columns: 1fr; }
-      .sidebar {
-        border-right: none;
-        border-bottom: 1px solid var(--border-light);
-      }
+      .sidebar { border-right: none; border-bottom: 1px solid var(--border-light); }
       .content { padding: 2rem 1.75rem 2.5rem; }
     }
   </style>
 </head>
 
 <body>
-  <div class="page">
+<div class="page">
 
-    <!-- LEFT SIDEBAR -->
-    <aside class="sidebar">
-      <!-- FIXED ROUTE: this file lives in app/jiracloud-projects/, so go up 2 levels to root -->
-      <a href="/MyPortfolio/index.html" class="back-link">← Back to Home</a>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a href="/MyPortfolio/index.html" class="back-link">← Back to Home</a>
 
+    <div class="project-title">Jira<br>Weekly Issue<br>Generator</div>
+    <div class="project-subtitle">Automation · ScriptRunner · Groovy</div>
 
-      <div class="project-title"><br>Issue</div>
-      <div class="project-subtitle">Jira Automation</div>
+    <div class="difficulty-bar">
+      <span>Difficulty:</span>
+      <span class="dot filled"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="difficulty-text">Very Easy</span>
+    </div>
 
-      <div class="sidebar-item">
+    <div class="sidebar-item">
+      <i class="fa-solid fa-rocket"></i>
+      <div><b>Status:</b> Production</div>
+    </div>
+
+    <div class="sidebar-item">
+      <i class="fa-solid fa-clock"></i>
+      <div><b>Trigger:</b> Weekly scheduled job</div>
+    </div>
+
+    <div class="sidebar-item">
+      <i class="fa-solid fa-bullseye"></i>
+      <div><b>Purpose:</b> Generate standardized weekly Jira issues</div>
+    </div>
+
+    <div class="sidebar-item">
+      <i class="fa-solid fa-ticket"></i>
+      <div><b>Output:</b> Jira Task created automatically</div>
+    </div>
+
+    <div class="divider"></div>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- Problem -->
+    <div class="experience-block">
+      <div class="experience-company">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        Problem
+      </div>
+      <p class="muted" style="margin-top:0.9rem;">
+        Weekly Jira issues were created manually and inconsistently, leading to
+        missing tasks, broken reporting, and unnecessary operational overhead.
+      </p>
+    </div>
+
+    <!-- Main idea -->
+    <div class="experience-block">
+      <div class="experience-company">
+        <i class="fa-solid fa-lightbulb"></i>
+        Main idea
+      </div>
+      <p class="muted" style="margin-top:0.9rem;">
+        Use a ScriptRunner Groovy job to automatically generate standardized Jira
+        issues on a weekly cadence using the Jira REST API.
+      </p>
+    </div>
+
+    <!-- Code -->
+    <div class="experience-block">
+      <div class="experience-company">
         <i class="fa-solid fa-code"></i>
-        <div><b>Type:</b> ScriptRunner Scheduled Job</div>
+        Automation script
       </div>
 
-      <div class="sidebar-item">
-        <i class="fa-solid fa-clock"></i>
-        <div><b>Trigger:</b> (cron)</div>
+<pre><code>import groovy.json.JsonOutput
+
+def projectKey    = "AS"
+def issueTypeName = "Task"
+
+def now    = new Date()
+def nowStr = now.format("yyyy-MM-dd HH:mm")
+
+def summary = "Issue created with ScriptRunner - ${nowStr}"
+
+def descriptionText = """
+This issue was generated automatically by a ScriptRunner job
+as part of the Jira Automation Portfolio.
+Created by Elva Ramos.
+""".stripIndent()
+
+def payload = [
+  fields: [
+    project   : [ key: projectKey ],
+    summary   : summary,
+    issuetype : [ name: issueTypeName ],
+    description: [
+      type: "doc",
+      version: 1,
+      content: [[
+        type: "paragraph",
+        content: [[ type: "text", text: descriptionText ]]
+      ]]
+    ]
+  ]
+]
+
+def response = post("/rest/api/3/issue")
+  .header("Content-Type", "application/json")
+  .body(JsonOutput.toJson(payload))
+  .asObject(Map)
+
+if (response.status == 201) {
+  logger.info("✅ Demo issue created: ${response.body.key}")
+}</code></pre>
+    </div>
+
+    <!-- Logs -->
+    <div class="experience-block">
+      <div class="experience-company">
+        <i class="fa-solid fa-terminal"></i>
+        Execution logs (sample)
       </div>
 
-      <div class="sidebar-item">
-        <i class="fa-solid fa-shield-halved"></i>
-        <div><b>Focus:</b> Consistency · Idempotency · Traceability</div>
+<pre><code>"Serializing object into 'interface java.util.Map'"
+"POST /rest/api/3/issue asObject Request Duration: 1624ms"
+"✅ Demo issue created: AS-6"</code></pre>
+    </div>
+
+    <!-- Output -->
+    <div class="experience-block">
+      <div class="experience-company">
+        <i class="fa-solid fa-ticket"></i>
+        Automatically created Jira issue
       </div>
 
-      <div class="divider"></div>
+      <p class="muted" style="margin-top:0.9rem;">
+        <a href="https://elvaramosglz.atlassian.net/browse/AS-6" target="_blank">
+          View Jira Issue (AS-6)
+        </a>
+      </p>
 
-      <!-- Optional: handy local navigation (same folder) -->
-      <!--
-      <div class="sidebar-item">
-        <i class="fa-solid fa-folder-open"></i>
-        <div>
-          <b>Other pages:</b><br />
-          <a href="jiracloud-automation.html" style="color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-soft);">
-            Jira Cloud Automation
-          </a><br />
-          <a href="whatsapp-api-automation.html" style="color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-soft);">
-            WhatsApp API Automation
-          </a>
-        </div>
-      </div>
-      -->
-    </aside>
+      <img
+        src="../../assets/issue-as-6.png"
+        alt="Automatically created Jira issue AS-6"
+        class="diagram-img"
+      />
+    </div>
 
-    <!-- RIGHT CONTENT -->
-    <main class="content">
-      <section>
-        <h2 class="section-title">Issue Generator</h2>
-
-        <!-- Problem -->
-        <div class="experience-block">
-          <div class="experience-company">
-            <i class="fa-solid fa-triangle-exclamation" style="color:var(--accent);"></i>
-            Problem (real context)
-          </div>
-
-          <p class="muted">
-            Operational Jira tasks were created manually. This resulted in inconsistent
-            issue structure, delayed creation, and limited traceability when reviewing historical execution.
-          </p>
-        </div>
-
-        <!-- Solution -->
-        <div class="experience-block">
-          <div class="experience-company">
-            <i class="fa-solid fa-lightbulb" style="color:var(--accent);"></i>
-            Solution (step by step)
-          </div>
-
-          <ul>
-            <li>Scheduled Groovy job using ScriptRunner.</li>
-            <li>Dynamic calculation of week key and due date.</li>
-            <li>Idempotency check to prevent duplicate issues.</li>
-            <li>Standardized issue fields and ownership.</li>
-            <li>Execution logging for audit and debugging.</li>
-          </ul>
-        </div>
-
-        <!-- Screenshots -->
-        <div class="experience-block">
-          <div class="experience-company">
-            <i class="fa-solid fa-camera" style="color:var(--accent);"></i>
-            Screenshots
-          </div>
-
-          <div class="placeholder">[Add screenshot: ScriptRunner scheduled job configuration]</div>
-          <div class="placeholder">[Add screenshot: Example Jira issue]</div>
-        </div>
-
-        <!-- Flows -->
-        <div class="experience-block">
-          <div class="experience-company">
-            <i class="fa-solid fa-diagram-project" style="color:var(--accent);"></i>
-            Flows
-          </div>
-
-          <ol style="margin-left:2.4rem; margin-top:1rem; color:var(--text-muted); line-height:1.7;">
-            <li>Cron trigger executes the job</li>
-            <li>Week key and due date are calculated</li>
-            <li>Guardrail check prevents duplicates</li>
-            <li>Issue is created in Jira Cloud</li>
-            <li>Execution result is logged</li>
-          </ol>
-        </div>
-
-        <!-- CSVs -->
-        <div class="experience-block">
-          <div class="experience-company">
-            <i class="fa-solid fa-file-csv" style="color:var(--accent);"></i>
-            CSVs
-          </div>
-
-          <p class="muted">
-            Not applicable. This automation writes directly to Jira and relies on logs
-            rather than CSV artifacts.
-          </p>
-        </div>
-
-        <!-- Logs -->
-        <div class="experience-block">
-          <div class="experience-company">
-            <i class="fa-solid fa-file-lines" style="color:var(--accent);"></i>
-            Logs
-          </div>
-
-          <div class="codebox">
-[2025-01-06 08:00] START IssueGenerator
-Computed week=2025-W02
-Created issue OPS-1234
-SUCCESS
-          </div>
-        </div>
-
-        <!-- Lessons learned -->
-        <div class="experience-block">
-          <div class="experience-company">
-            <i class="fa-solid fa-graduation-cap" style="color:var(--accent);"></i>
-            Lessons learned
-          </div>
-
-          <ul>
-            <li>Recurring automations must be idempotent.</li>
-            <li>Standardization improves adoption and reporting.</li>
-            <li>Logs are first-class operational artifacts.</li>
-          </ul>
-        </div>
-
-      </section>
-    </main>
-  </div>
+  </main>
+</div>
 </body>
 </html>
